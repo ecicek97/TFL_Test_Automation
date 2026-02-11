@@ -72,6 +72,10 @@ npm run test:api
 
 # Run UI tests with HTML/JSON reports
 npm run test:report
+
+# Advanced: Run with specific Cucumber profile
+npx cucumber-js --profile ui    # UI tests
+npx cucumber-js --profile api   # API tests
 ```
 
 Reports are written to `reports/` (HTML, JSON, screenshots on failure).
