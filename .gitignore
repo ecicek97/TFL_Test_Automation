@@ -1,0 +1,10 @@
+node_modules/
+dist/
+reports/
+*.log
+.DS_Store
+*.png
+playwright-report/
+test-results/
+package-lock.json
+yarn.lock
