@@ -50,15 +50,15 @@ export const TestData = {
  */
 export function getStationInfo(name: string) {
   const normalized = name.toLowerCase().replace(/\s+/g, '');
-  
+
   if (normalized.includes('leicester')) {
     return TestData.validLocations.leicesterSquare;
   }
-  
+
   if (normalized.includes('covent')) {
     return TestData.validLocations.coventGarden;
   }
-  
+
   // Fallback for other stations not in test data
   return {
     searchText: name,

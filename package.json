@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Test automation framework for TfL Journey Planner widget - Senior QA STA Coding Challenge",
   "scripts": {
-    "test": "npx cucumber-js --require-module ts-node/register --require 'step-definitions/**/*.ts' --require 'support/**/*.ts' --format progress",
-    "test:headed": "HEADLESS=false npx cucumber-js --require-module ts-node/register --require 'step-definitions/**/*.ts' --require 'support/**/*.ts' --format progress",
-    "test:report": "npx cucumber-js --require-module ts-node/register --require 'step-definitions/**/*.ts' --require 'support/**/*.ts' --format json:reports/cucumber-report.json --format html:reports/cucumber-report.html"
+    "test": "npx cucumber-js",
+    "test:ui": "npx cucumber-js -p ui",
+    "test:api": "npx cucumber-js -p api",
+    "test:headed": "HEADLESS=false npx cucumber-js -p ui",
+    "test:report": "npx cucumber-js -p ui"
   },
   "keywords": [
     "tfl",

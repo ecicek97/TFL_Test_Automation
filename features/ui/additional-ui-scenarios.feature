@@ -1,10 +1,39 @@
 # language: en
-# Additional Scenarios - Documentation Only (No automation implemented)
-# These scenarios represent further functional and non-functional test ideas for the TfL Journey Planner widget
+@manual
+Feature: TfL Journey Planner - Additional Scenarios (Documentation)
+  These scenarios are proposed for future coverage and are not automated yet.
 
-Feature: Additional Test Scenarios - TfL Journey Planner
+  # === FUNCTIONAL SCENARIOS (STEP DEFINITIONS DRAFTED) ===
 
-  # === FUNCTIONAL SCENARIOS ===
+  Scenario: Verify journey planning for different travel modes
+    Given I am on the TfL Journey Planner page
+    When I select "Public transport" mode
+    And I plan a journey from "Leicester Square" to "Covent Garden" using autocomplete suggestions
+    Then I should see journey results for public transport
+
+  Scenario: Verify leaving at specific date and time
+    Given I am on the TfL Journey Planner page
+    When I choose a future date and time
+    And I plan a journey from "Leicester Square" to "Covent Garden" using autocomplete suggestions
+    Then the results should reflect the chosen date and time
+
+  Scenario: Verify accessibility options affect results
+    Given I am on the TfL Journey Planner page
+    When I enable step-free access
+    And I plan a journey from "Leicester Square" to "Covent Garden" using autocomplete suggestions
+    Then the results should show step-free routes
+
+  Scenario: Verify input sanitization for special characters
+    Given I am on the TfL Journey Planner page
+    When I enter invalid locations with special characters and plan a journey
+    Then I should see an error or no results message
+
+  Scenario: Verify responsive layout on mobile viewport
+    Given I am on the TfL Journey Planner page
+    When I resize the browser to a mobile viewport
+    Then the journey planner form should remain usable
+
+  # === FUNCTIONAL SCENARIOS (IDEAS ONLY) ===
 
   Scenario: Plan journey with different travel modes (Public transport, Cycling, Walking)
     # Verify user can switch between travel modes and get appropriate results
@@ -43,7 +72,7 @@ Feature: Additional Test Scenarios - TfL Journey Planner
   Scenario: Multi-modal journey (e.g. Tube + Bus)
     # Verify combined transport options display correctly
 
-  # === NON-FUNCTIONAL SCENARIOS ===
+  # === NON-FUNCTIONAL SCENARIOS (IDEAS ONLY) ===
 
   Scenario: Page load performance
     # Verify Journey Planner widget loads within acceptable time (e.g. < 5 seconds)
