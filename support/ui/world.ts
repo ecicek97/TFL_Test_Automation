@@ -1,8 +1,8 @@
 import { IWorldOptions, setWorldConstructor, World } from '@cucumber/cucumber';
 import { chromium, firefox, webkit, Browser, BrowserContext, Page, BrowserType } from 'playwright';
-import { JourneyPlannerPage } from '../pages/JourneyPlannerPage';
+import { JourneyPlannerPage } from '../../pages/JourneyPlannerPage';
 
-export class CustomWorld extends World {
+export class UiWorld extends World {
   browser!: Browser;
   context!: BrowserContext;
   page!: Page;
@@ -51,4 +51,4 @@ export class CustomWorld extends World {
   }
 }
 
-setWorldConstructor(CustomWorld);
+setWorldConstructor(UiWorld);

@@ -8,6 +8,7 @@ Automated UI tests for the TfL (Transport for London) Journey Planner widget at 
 ✅ **Language:** TypeScript  
 ✅ **Gherkin Syntax:** All scenarios written in Cucumber/Gherkin  
 ✅ **UI Automation:** Playwright with Chromium  
+✅ **API Automation:** Playwright API request context  
 ✅ **5 Minimum Scenarios:** All required test scenarios implemented and passing  
 ✅ **Public Repository:** Hosted on GitHub  
 ✅ **README:** Development decisions documented  
@@ -19,6 +20,7 @@ Automated UI tests for the TfL (Transport for London) Journey Planner widget at 
 
 - **Language:** TypeScript
 - **UI Automation:** Playwright
+- **API Automation:** Playwright API request context
 - **BDD:** Cucumber (Gherkin syntax)
 - **Runtime:** Node.js
 
@@ -59,13 +61,16 @@ cp .env.example .env
 ## Running Tests
 
 ```bash
-# Run all journey planner tests (headless)
+# Run UI tests (headless)
 npm test
 
-# Run with browser visible
+# Run UI tests with browser visible
 npm run test:headed
 
-# Run with HTML/JSON reports
+# Run API tests
+npm run test:api
+
+# Run UI tests with HTML/JSON reports
 npm run test:report
 ```
 
@@ -78,16 +83,31 @@ Reports are written to `reports/` (HTML, JSON, screenshots on failure).
 ```
 TFL_TestAutomation/
 ├── features/
-│   ├── journey-planner.feature    # 5 automated scenarios
-│   └── additional-scenarios.feature  # Extra scenarios (documentation only)
+│   ├── ui/
+│   │   ├── journey-planner.feature    # 5 automated scenarios
+│   │   └── additional-ui-scenarios.feature # Extra UI scenarios (documentation only)
+│   ├── api/
+│   │   └── openlibrary-api.feature    # Open Library API scenarios
+│   └── additional-api-scenarios.feature # Extra API scenarios (documentation only)
 ├── step-definitions/
-│   └── journey-planner.steps.ts   # Step implementations
+│   ├── ui/
+│   │   └── journey-planner.steps.ts   # UI step implementations
+│   └── api/
+│       └── openlibrary-api.steps.ts   # API step implementations
 ├── pages/
 │   └── JourneyPlannerPage.ts      # Page Object for Journey Planner
 ├── support/
-│   ├── world.ts                   # Cucumber world (browser setup)
-│   ├── hooks.ts                   # Before/After hooks
+│   ├── ui/
+│   │   ├── world.ts               # UI Cucumber world (browser setup)
+│   │   ├── hooks.ts               # UI hooks
+│   │   └── test-data.ts           # UI test data
+│   ├── api/
+│   │   ├── world.ts               # API Cucumber world (request setup)
+│   │   ├── hooks.ts               # API hooks
+│   │   └── openlibrary-test-data.ts # API test data
 │   └── ensure-reports-dir.ts      # Report directory setup
+├── api-fixtures/
+│   └── openlibrary/               # Baseline thumbnail images
 ├── reports/                       # Generated reports
 ├── cucumber.js                    # Cucumber config
 ├── playwright.config.ts           # Playwright config
@@ -116,14 +136,22 @@ The framework implements the exact scenarios specified in the STA Coding Challen
 
 ## Additional Scenarios (Documentation Only)
 
-See `features/additional-scenarios.feature` for extra functional and non-functional ideas, including:
+For API-related coverage candidates, see [features/api/additional-api-scenarios.feature](features/api/additional-api-scenarios.feature). Examples include:
+
+- Content-type validation
+- Bibkey filtering and missing key behavior
+- Cache headers for thumbnails
+- Preview and info URL reachability
+- Thumbnail dimension checks
+
+For UI-related functional and non-functional candidates, see [features/ui/additional-ui-scenarios.feature](features/ui/additional-ui-scenarios.feature). Examples include:
 
 - Travel modes (public transport, cycling, walking)
-- Date/time preferences (leaving vs arriving)
+- Date and time preferences (leaving vs arriving)
 - Accessibility options
 - Performance and load
-- Responsive and cross-browser behaviour
-- Security (e.g. input sanitisation)
+- Responsive and cross-browser behavior
+- Security (for example, input sanitization)
 - Keyboard navigation and accessibility (a11y)
 
 ---
@@ -178,6 +206,19 @@ See `features/additional-scenarios.feature` for extra functional and non-functio
 - **Cookies:** TfL may show cookie banners; the framework attempts to accept them.
 - **Rate limiting:** Frequent runs may be affected by TfL’s rate limiting.
 - **Invalid journey behaviour:** Exact error messaging may differ; assertions are kept flexible.
+- **Open Library API data drift:** If the API returns different metadata or new thumbnails, update the baseline images in `api-fixtures/openlibrary` and expected values in `support/api/openlibrary-test-data.ts`.
+
+---
+
+## Open Library API Tests
+
+The API scenarios validate:
+
+- Response status and timing
+- Expected number of results
+- Known book metadata for each bibkey
+- Thumbnail URL validity and image content type
+- Pixel-level thumbnail comparison against stored baseline images in `api-fixtures/openlibrary`
 
 ---
 
