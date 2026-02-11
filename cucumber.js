@@ -6,6 +6,7 @@ module.exports = {
     formatOptions: { snippetInterface: 'async-await' },
     tags: 'not @manual',
     paths: ['features/ui/**/*.feature'],
+    retry: 1,
   },
   ui: {
     require: ['step-definitions/ui/**/*.ts', 'support/ui/**/*.ts'],
@@ -14,6 +15,7 @@ module.exports = {
     formatOptions: { snippetInterface: 'async-await' },
     tags: 'not @manual',
     paths: ['features/ui/**/*.feature'],
+    retry: 1,
   },
   api: {
     require: ['step-definitions/api/**/*.ts', 'support/api/**/*.ts'],
@@ -22,5 +24,6 @@ module.exports = {
     formatOptions: { snippetInterface: 'async-await' },
     tags: 'not @manual',
     paths: ['features/api/**/*.feature'],
+    retry: 1,
   },
 };

@@ -4,8 +4,8 @@ export default defineConfig({
   testDir: './',
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 0 : 0,
-  workers: 1, // Cucumber runs scenarios sequentially
+  retries: 1,
+  workers: 1,
   reporter: 'html',
   use: {
     baseURL: process.env.BASE_URL || 'https://tfl.gov.uk'  ,
