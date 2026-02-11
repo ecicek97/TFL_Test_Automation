@@ -1,4 +1,3 @@
-
 @manual
 Feature: TfL Journey Planner - Additional Scenarios (Documentation)
   These scenarios are proposed for future coverage and are not automated yet.

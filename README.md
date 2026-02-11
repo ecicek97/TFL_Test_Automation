@@ -86,9 +86,9 @@ TFL_TestAutomation/
 │   ├── ui/
 │   │   ├── journey-planner.feature    # 5 automated scenarios
 │   │   └── additional-ui-scenarios.feature # Extra UI scenarios (documentation only)
-│   ├── api/
-│   │   └── openlibrary-api.feature    # Open Library API scenarios
-│   └── additional-api-scenarios.feature # Extra API scenarios (documentation only)
+│   └── api/
+│       ├── openlibrary-api.feature    # Open Library API scenarios
+│       └── additional-api-scenarios.feature # Extra API scenarios (documentation only)
 ├── step-definitions/
 │   ├── ui/
 │   │   └── journey-planner.steps.ts   # UI step implementations
@@ -120,17 +120,15 @@ TFL_TestAutomation/
 
 ## Implemented Scenarios (5 Minimum - Per Challenge Requirements)
 
-The framework implements the exact scenarios specified in the STA Coding Challenge:
+The framework implements all 5 scenarios specified in the STA Coding Challenge:
 
-1. **Verify that a valid journey can be planned using the widget** – From "Leicester Square Underground Station" to "Covent Garden Underground Station" using autocomplete suggestions (not entering complete text). Validates results for both walking and cycling time.
+1. **Valid journey planning using the widget** (Leicester Square → Covent Garden via autocomplete)
+2. **Edit preferences and select routes with least walking**
+3. **View Details and verify complete access information**
+4. **Invalid journey handling** (widget does not provide results for invalid locations)
+5. **Empty input validation** (widget cannot plan journey without locations)
 
-2. **Edit preferences, select routes with least walking, and validate journey time** – Once journey is planned, clicks "Edit preferences", selects "Routes with least walking", updates journey, and validates the journey time is displayed.
-
-3. **Click on "View Details" and verify complete access information** – Opens "View Details" after journey planning and verifies complete access information at Covent Garden Underground Station.
-
-4. **Verify that the widget does not provide results when an invalid journey is planned** – Tests with 1 or more invalid locations entered into the widget and expects no valid results.
-
-5. **Verify that the widget is unable to plan a journey if no locations are entered** – Attempts to plan a journey without entering any locations and verifies the widget cannot plan.
+See [features/ui/journey-planner.feature](features/ui/journey-planner.feature) for complete Gherkin scenarios and implementation details.
 
 ---
 
@@ -157,17 +155,6 @@ For UI-related functional and non-functional candidates, see [features/ui/additi
 ---
 
 ## Development Decisions
-
-### TypeScript + Playwright
-
-- TypeScript for type safety and maintainability.
-- Playwright for fast, stable UI tests with built-in waits, auto-retry, and strong debugging support.
-
-### Gherkin / Cucumber
-
-- Scenarios written in natural language.
-- Shared vocabulary for BAs, developers, and QA.
-- Easy to add more scenarios without changing step logic.
 
 ### Page Object Model (POM)
 
@@ -203,7 +190,7 @@ For UI-related functional and non-functional candidates, see [features/ui/additi
 ## Known Considerations
 
 - **TfL UI changes:** Selectors may need updates if the Journey Planner layout changes.
-- **Cookies:** TfL may show cookie banners; the framework attempts to accept them.
+- **Cookies:** TFL may show cookie banners; the framework attempts to accept them.
 - **Rate limiting:** Frequent runs may be affected by TfL’s rate limiting.
 - **Invalid journey behaviour:** Exact error messaging may differ; assertions are kept flexible.
 - **Open Library API data drift:** If the API returns different metadata or new thumbnails, update the baseline images in `api-fixtures/openlibrary` and expected values in `support/api/openlibrary-test-data.ts`.
@@ -225,7 +212,7 @@ The API scenarios validate:
 ## AI Disclaimer
 
 **Use of AI:**  
-This project was developed with assistance from AI tools (including code generation and refactoring). All code has been reviewed and adapted for correctness, maintainability, and alignment with the requirements. Tests have been designed to be robust and maintainable.
+This project was developed with assistance from AI tools.
 
 ---
 
