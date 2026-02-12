@@ -38,25 +38,7 @@ Automated UI tests for the TfL (Transport for London) Journey Planner widget at 
 ```bash
 npm install
 npx playwright install chromium
-```
 
-### Environment Configuration
-
-Copy `.env.example` to `.env` and adjust if needed:
-
-```bash
-cp .env.example .env
-```
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `BASE_URL` | TfL Journey Planner URL | `https://tfl.gov.uk/plan-a-journey` |
-| `TFL_APP_ID` | (Optional) TfL API app ID | - |
-| `TFL_APP_KEY` | (Optional) TfL API app key | - |
-| `TEST_USERNAME` | (Optional) Test user for future login features | - |
-| `TEST_PASSWORD` | (Optional) Test user password | - |
-
----
 
 ## Running Tests
 
@@ -138,14 +120,6 @@ See [features/ui/journey-planner.feature](features/ui/journey-planner.feature) f
 
 ## Additional Scenarios (Documentation Only)
 
-For API-related coverage candidates, see [features/api/additional-api-scenarios.feature](features/api/additional-api-scenarios.feature). Examples include:
-
-- Content-type validation
-- Bibkey filtering and missing key behavior
-- Cache headers for thumbnails
-- Preview and info URL reachability
-- Thumbnail dimension checks
-
 For UI-related functional and non-functional candidates, see [features/ui/additional-ui-scenarios.feature](features/ui/additional-ui-scenarios.feature). Examples include:
 
 - Travel modes (public transport, cycling, walking)
@@ -155,6 +129,14 @@ For UI-related functional and non-functional candidates, see [features/ui/additi
 - Responsive and cross-browser behavior
 - Security (for example, input sanitization)
 - Keyboard navigation and accessibility (a11y)
+
+For API-related coverage candidates, see [features/api/additional-api-scenarios.feature](features/api/additional-api-scenarios.feature). Examples include:
+
+- Content-type validation
+- Bibkey filtering and missing key behavior
+- Cache headers for thumbnails
+- Preview and info URL reachability
+- Thumbnail dimension checks
 
 ---
 
